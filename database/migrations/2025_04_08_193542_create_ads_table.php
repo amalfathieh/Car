@@ -11,12 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('complaints', function (Blueprint $table) {
+        Schema::create('ads', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('phone');
-            $table->text('content');
-            $table->enum('status', ['accepted', 'waiting', 'rejected'])->default('waiting');
+            $table->string('full_name');
+            $table->string('image');
+            $table->string('ad_url');
+            $table->unsignedInteger('hit')->default(0);
+            $table->date('start_date');
+            $table->date('end_date');
+            $table->string('location');
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('complaints');
+        Schema::dropIfExists('ads');
     }
 };

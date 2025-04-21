@@ -28,7 +28,7 @@ class CarService
                 $images[] = $this->fileService->upload($image, "carsImages");
             }
 
-            $data['images'] = $images; // بدون json_encode
+            $data['images'] = $images;
         }
 
         $car = Car::create($data);
@@ -46,7 +46,7 @@ class CarService
                 $images[] = $this->fileService->upload($image, "carsImages");
             }
 
-            $data['images'] = $images; // بدون json_encode
+            $data['images'] = $images;
         }
 
         $car->update($data);

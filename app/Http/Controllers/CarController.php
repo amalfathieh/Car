@@ -32,7 +32,7 @@ class CarController extends Controller
         $car = Car::find($id);
         if($car){
             if($car->user_id != Auth::user()->id){
-                return Response::Error('unauthorized');
+                return Response::Error('unauthorized', 403);
             }
 
             $car = $this->carService->update($request, $car);
@@ -45,7 +45,11 @@ class CarController extends Controller
     //  DELETE SPECIFIC CAE BY ID
     public function delete($id){
         $car = Car::find($id);
+        $user = Auth::user();
         if($car){
+            if($car->user_id != $user->id || $user->role != 'admin'){
+                return Response::Error('unauthorized', 403);
+            }
             $this->carService->delete($car);
             return Response::Success(null, 'Car deleted successfully');
         }

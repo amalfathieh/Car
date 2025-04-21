@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use function Ramsey\Collection\add;
 
 class UserController extends Controller
 {
@@ -46,13 +47,10 @@ class UserController extends Controller
 
             $data['profile_image'] = $new_image;
         }
-        $user->update($user);
+        $user->update($data);
 
-        return response()->json([
-            'user' =>$user,
-            'statusCode' => 201,
-            'message' => 'profile edit successfully'
-        ], 201);
+        return Response::Success($user,'profile edit successfully');
+
     }
 
     public function login(LoginRequest $request){
